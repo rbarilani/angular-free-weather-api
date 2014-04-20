@@ -16,8 +16,6 @@
 #
 #
 
-dist
-
 # -- Bower -- #
 *bower_components
 

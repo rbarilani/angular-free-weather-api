@@ -7,7 +7,9 @@ module.exports = function (grunt) {
     var yoConfig = {
         livereload: 35729,
         src: 'src',
-        dist: 'dist'
+        dist: 'dist',
+        pkgname : 'free-weather-api',
+        demo : 'demo'
     };
 
     // Livereload setup
@@ -21,16 +23,35 @@ module.exports = function (grunt) {
 
     // Project configuration
     grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
+        bower: grunt.file.readJSON('bower.json'),
         yo: yoConfig,
         meta: {
             banner: '/**\n' +
-                ' * <%= pkg.name %>\n' +
-                ' * @version v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
-                ' * @link <%= pkg.homepage %>\n' +
-                ' * @author <%= pkg.author.name %> <<%= pkg.author.email %>>\n' +
+                ' * <%= bower.name %>\n' +
+                ' * @version v<%= bower.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
+                ' * @link <%= bower.homepage %>\n' +
+                ' * @author <%= bower.author.name %> <<%= bower.author.email %>>\n' +
                 ' * @license MIT License, http://www.opensource.org/licenses/MIT\n' +
                 ' */\n'
+        },
+        connect: {
+            options: {
+                hostname: 'localhost',
+                port: 9001,
+                open: true,
+                livereload: '<%= yo.livereload %>'
+            },
+            server: {
+                options: {
+                    base: 'demo'
+                }
+            }
+        },
+        open : {
+            server : {
+                path: 'http://<%= connect.options.hostname %>:<%= connect.options.port %>',
+                app: 'Google Chrome'
+            }
         },
         clean: {
             dist: {
@@ -50,6 +71,16 @@ module.exports = function (grunt) {
             gruntfile: {
                 files: '<%= jshint.gruntfile.src %>',
                 tasks: ['jshint:gruntfile']
+            },
+            demo : {
+                files : ['demo/**/*.{js,html}'],
+                options: {
+                    livereload: true
+                }
+            },
+            src : {
+                files : '<%= jshint.src.src %>',
+                tasks: ['jshint:src', 'karma:unit','demo']
             },
             test: {
                 files: '<%= jshint.test.src %>',
@@ -86,54 +117,77 @@ module.exports = function (grunt) {
             }
         },
         ngmin: {
-            options: {
-                banner: '<%= meta.banner %>'
-            },
             dist: {
-                src: ['<%= yo.src %>/<%= pkg.name %>.js'],
-                dest: '<%= yo.dist %>/<%= pkg.name %>.js'
+                src: ['<%= yo.src %>/<%= yo.pkgname %>.js'],
+                dest: '<%= yo.dist %>/<%= yo.pkgname %>.js'
             }
         },
         concat: {
             options: {
-                banner: '<%= meta.banner %>',
                 stripBanners: true
             },
             dist: {
-                src: ['<%= yo.src %>/<%= pkg.name %>.js'],
-                dest: '<%= yo.dist %>/<%= pkg.name %>.js'
+                src: ['<%= yo.src %>/<%= yo.pkgname %>.js'],
+                dest: '<%= yo.dist %>/<%= yo.pkgname %>.js'
             }
         },
         uglify: {
-            options: {
-                banner: '<%= meta.banner %>'
-            },
             dist: {
-                src: '<%= concat.dist.dest %>',
-                dest: '<%= yo.dist %>/<%= pkg.name %>.min.js'
+                src: '<%= yo.dist %>/<%= yo.pkgname %>.js',
+                dest: '<%= yo.dist %>/<%= yo.pkgname %>.min.js'
+            }
+        },
+        usebanner: {
+            dist: {
+                options: {
+                    position: 'top',
+                    banner: '<%= meta.banner %>',
+                    linebreak: true
+                },
+                files: {
+                    src: [ 'dist/*.js' ]
+                }
             }
         },
         copy : {
-            dist : {
-                expand : false, src: ['dist/*.js'], dest: 'demo/', filter: 'isFile'
+            distToDemo : {
+                expand : false,
+                src: ['<%= yo.dist %>/*.js'],
+                dest: 'demo/',
+                filter: 'isFile'
             }
         }
     });
+
+    grunt.registerTask('serve' ,[
+        'build',
+        'demo',
+        'connect:server',
+        'open:server',
+        'watch'
+    ]);
 
     grunt.registerTask('test', [
         'jshint',
         'karma:unit'
     ]);
 
-    grunt.registerTask('build', [
-        'clean:dist',
-        'ngmin:dist',
-        'uglify:dist'
+    grunt.registerTask('release', [
+        'test',
+        'build',
+        'demo'
     ]);
 
-    grunt.registerTask('updateDemo', [
-        'build',
-        'copy:dist'
+    grunt.registerTask('build', [
+        'clean:dist',
+        //'ngmin:dist',
+        'concat:dist',
+        'uglify:dist',
+        'usebanner:dist'
+    ]);
+
+    grunt.registerTask('demo', [
+        'copy:distToDemo'
     ]);
 
     grunt.registerTask('default', ['test']);

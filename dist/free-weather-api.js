@@ -1,3 +1,11 @@
+/**
+ * angular-free-weather-api
+ * @version v0.0.1beta - 2014-04-22
+ * @link https://github.com/hal9087/free-weather-api
+ * @author Ruben Barilani <ruben.barilani.dev@gmail.com>
+ * @license MIT License, http://www.opensource.org/licenses/MIT
+ */
+
 'use strict';
 
 /**

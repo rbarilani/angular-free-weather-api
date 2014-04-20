@@ -1,7 +1,20 @@
 {
-  "name": "free-weather-api",
-  "version": "0.0.1",
-  "description": "freeWeatherApi",
+  "name": "angular-free-weather-api",
+  "version": "0.0.1beta",
+  "main" : "dist/free-weather-api.js",
+  "exclude" : [
+    "demo",
+    ".jshintrc-test",
+    ".jshintrc",
+    ".bowerrc",
+    ".editorconfig",
+    ".gitignore",
+    ".travis.yml",
+    "package.json",
+    "Gruntfile.js",
+    "karma.conf.js"
+  ],
+  "description": "A simple angular implementation for consuming the worldweatheronline.com's REST Api. http://developer.worldweatheronline.com/io-docs",
   "keywords": [
     "angular angularJS angularJs weather weatheronline.com freeWeatherApi meteo"
   ],
@@ -28,6 +41,10 @@
     "grunt-contrib-uglify": "~0.2.4",
     "grunt-contrib-watch": "~0.5.3",
     "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-contrib-connect": "~0.7.1",
+    "grunt-open": "~0.2.3",
+    "grunt-banner": "~0.2.2",
     "grunt-ngmin": "0.0.3",
     "requirejs": "~2.1.11",
     "matchdep": "~0.1.2",
@@ -37,6 +54,6 @@
     "karma-chrome-launcher": "~0.1.3",
     "karma-requirejs": "~0.2.1",
     "karma-phantomjs-launcher": "~0.1.4",
-    "grunt-contrib-copy": "~0.5.0"
+    "connect-livereload": "~0.3.0"
   }
 }

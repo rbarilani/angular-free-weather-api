@@ -1,4 +1,15 @@
 language: node_js
 node_js:
-  - '0.10'
-  - '0.8'
+  - "0.10"
+branches:
+  only:
+    - master
+install:
+  - npm install -g grunt-cli
+  - npm install -g bower
+  - npm install
+  - bower install
+before_script:
+  - phantomjs --version
+script:
+  - grunt release --force

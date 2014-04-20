@@ -6,7 +6,7 @@ describe('hal9087.freeWeatherApi', function () {
 
         var freeWeatherApiProvider,
             apiKey = 'foobar',
-            baseExpectedUrl = '/test/weather.ashx?callback=JSON_CALLBACK&format=json&includelocation=yes&key=foobar';
+            baseExpectedUrl = '/free/test/weather.ashx?callback=JSON_CALLBACK&format=json&includelocation=yes&key=foobar';
 
         beforeEach(function () {
 
