@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Free Weather Api Demo</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+</head>
+<body ng-app="freeWeatherApiDemoApp">
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 col-xs-offset-4">
+                <div class="jumbotron">
+
+                    <!-- Form -->
+                    <form name="form" class="form-horizontal" ng-submit="getInfo(city, days)" novalidate>
+
+                        <div class="form-group">
+                            <label for="city" class="col-xs-2 control-label">Area</label>
+                            <div class="col-xs-10">
+                                <input name="city" id="city"
+                                       type="text" class="form-control"
+                                       ng-model="city" placeholder="City/Area" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="days" class="col-xs-2 control-label">Days</label>
+                            <div class="col-xs-10">
+                                <select name="days" id="days" class="form-control" ng-model="days">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">Submit</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <!-- Weather result -->
+                    <div class="alert alert-danger" ng-if="weather.error">
+                        <h4>Error retrieving weather!</h4>
+                        <ul>
+                            <li ng-repeat="error in weather.error">{{ error.msg }}</li>
+                        </ul>
+                    </div>
+
+                    <div ng-if="weather.data && !weather.error">
+
+                        <h4>
+                            {{ weather.data.nearest_area[0].areaName[0].value }} -  {{ weather.data.nearest_area[0].region[0].value }} ,
+                            {{ weather.data.nearest_area[0].country[0].value }}
+                        </h4>
+
+                    </div>
+
+                    <div ng-if="weather.data.weather">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item" ng-repeat="dayWeather in weather.data.weather">
+                                <h4 class="list-group-item-heading">{{ $index === 0 ? 'Oggi' : dayWeather.date }}</h4>
+                                <p class="list-group-item-text">
+                                    <img ng-src="{{ dayWeather.weatherIconUrl[0].value }}" title="" alt=""/>
+                                    {{ dayWeather.weatherDesc[0].value }}
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="dist/free-weather-api.js"></script>
+    <script src="index.js"></script>
+
+</body>
+</html>
