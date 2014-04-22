@@ -101,19 +101,19 @@ angular.module('hal9087.freeWeatherApi', [])
                          '/' + parameters.version + endPoint;
                 },
                 config : function (q, params, httpConfig) {
-                    var httpParams;
+                    var httpParams,
+                        modifiedParams = params || {},
+                        defaultParams = angular.copy(parameters.params);
 
-                    params = params || {};
+                    modifiedParams.format = 'json'; // restrict to json result
 
                     if(parameters.method === 'jsonp') {
-                        params.callback = 'JSON_CALLBACK';
+                        modifiedParams.callback = 'JSON_CALLBACK'; // $http JSON_CALLBACK constant
                     }
-
-                    params.format = 'json';
 
                     httpParams = angular.extend(
                         {key :  provider.getApiKey(), 'q' : q },
-                        angular.extend(parameters.params, params)
+                        angular.extend(defaultParams, modifiedParams)
                     );
 
                     return angular.extend({params : httpParams}, httpConfig || {});
@@ -156,7 +156,7 @@ angular.module('hal9087.freeWeatherApi', [])
             return key;
         };
 
-        provider.$get = ['$q','$http', function ($q, $http) {
+        provider.$get = ['$q','$http','$rootScope', function ($q, $http, $rootScope) {
 
             /**
              * @ngdoc service
@@ -187,8 +187,11 @@ angular.module('hal9087.freeWeatherApi', [])
 
                     var config     = utils.config(q, params, httpConfig),
                         deferred   = $q.defer(),
+                        promise = deferred.promise,
                         httpMethod = parameters.method,
                         searchApiKey = 'search_api';
+
+                    promise.$data = {};
 
                     $http
                         [httpMethod](url, config)
@@ -220,6 +223,8 @@ angular.module('hal9087.freeWeatherApi', [])
                                 data = angular.copy(response.data);
                             }
 
+                            angular.extend(promise.$data , data);
+
                             deferred.resolve ({
                                 data : data,
                                 originalResponse : response
@@ -234,7 +239,7 @@ angular.module('hal9087.freeWeatherApi', [])
                             });
                         });
 
-                    return deferred.promise;
+                    return promise;
                 };
             }
 

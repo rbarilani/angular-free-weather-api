@@ -10,6 +10,7 @@ describe('hal9087.freeWeatherApi', function () {
 
         beforeEach(function () {
 
+
             // Initialize the service provider
             // by injecting it to a fake module's config block
             var fakeModule = angular.module('test.app.config',[]);
@@ -22,6 +23,10 @@ describe('hal9087.freeWeatherApi', function () {
                 });
 
                 freeWeatherApiProvider.setApiKey(apiKey);
+            })
+            .controller('TestCtrl', function ($scope, freeWeatherApi) {
+                $scope.weatherData =  freeWeatherApi
+                    .localWeather($scope.city).$data;
             });
 
             // Initialize test.app injector
@@ -52,6 +57,10 @@ describe('hal9087.freeWeatherApi', function () {
                 freeWeatherApi = _freeWeatherApi_;
             }));
 
+            afterEach(function () {
+                freeWeatherApi = undefined;
+            });
+
 
             it('Should have this functions and aren\'t empty functions', function () {
                 angular.forEach([
@@ -77,9 +86,8 @@ describe('hal9087.freeWeatherApi', function () {
                 afterEach(function() {
                     $httpBackend.verifyNoOutstandingExpectation();
                     $httpBackend.verifyNoOutstandingRequest();
+                    $httpBackend.resetExpectations();
                 });
-
-
 
                 it('Should call the correct end point with correct params', function () {
                     var expectedResponseData = {
@@ -93,7 +101,6 @@ describe('hal9087.freeWeatherApi', function () {
                             return [200, expectedResponseData];
                         });
 
-
                     freeWeatherApi
                         .localWeather('Rome')
                         .then(function (response) {
@@ -101,11 +108,13 @@ describe('hal9087.freeWeatherApi', function () {
 
                         });
 
+
                     $httpBackend.flush();
 
                     expect(actualResponse.data).toBeDefined();
                     expect(actualResponse.data).toEqual(expectedResponseData.data);
                 });
+
 
                 it('Should reject when error response', function () {
                     var responseData = {
@@ -159,7 +168,48 @@ describe('hal9087.freeWeatherApi', function () {
                     expect(actualResponse.data).toBeDefined();
                     expect(actualResponse.data).toEqual(responseData.data);
                 });
+
+
+
             });
+        });
+
+
+        describe('magic resolve', function () {
+            var $httpBackend;
+
+
+            beforeEach(inject(function(_$httpBackend_) {
+                $httpBackend = _$httpBackend_;
+            }));
+
+            afterEach(function() {
+                $httpBackend.verifyNoOutstandingExpectation();
+                $httpBackend.verifyNoOutstandingRequest();
+            });
+
+            it('should fill the object with data result, when resolved' ,inject(function ($rootScope, $controller) {
+                var $scope = $rootScope.$new();
+
+                $scope.city = 'NewYoriyiutyyk';
+                var ctrl = $controller('TestCtrl', {
+                    $scope : $scope
+                });
+
+                $httpBackend
+                    .expectJSONP(baseExpectedUrl + '&q=' + $scope.city )
+                    .respond(function () {
+                        return [200, {data:{foo:1}}];
+                    });
+
+                expect($scope.weatherData).toEqual({});
+
+                $httpBackend.flush();
+
+                expect($scope.weatherData).toBeDefined();
+                expect($scope.weatherData).not.toEqual({});
+                expect($scope.weatherData).toEqual({foo:1});
+            }));
         });
 
     });

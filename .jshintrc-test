@@ -27,6 +27,7 @@
     "afterEach",
     "inject",
     "it",
+    "iit",
     "expect"
   ]
 }
