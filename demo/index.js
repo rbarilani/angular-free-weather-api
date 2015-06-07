@@ -2,7 +2,7 @@
 
 (function (angular){
     angular
-        .module('freeWeatherApiDemoApp', ['hal9087.freeWeatherApi'])
+        .module('freeWeatherApiDemoApp', ['rbarilani.freeWeatherApi'])
 
         .config(function (freeWeatherApiProvider){
 

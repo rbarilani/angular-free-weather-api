@@ -3,9 +3,7 @@ angular-free-weather-api
 
 > **Version**: 0.0.1beta
 
-[![Build Status](https://travis-ci.org/hal9087/angular-free-weather-api.png)](https://travis-ci.org/hal9087/angular-free-weather-api)
-[![Bower version](https://badge.fury.io/bo/angular-free-weather-api.svg)](http://badge.fury.io/bo/angular-free-weather-api)
-[![Dependencies](https://david-dm.org/hal9087/angular-free-weather-api.png)](https://david-dm.org/hal9087/angular-free-weather-api.png)
+[![Build Status](https://travis-ci.org/rbarilani/angular-free-weather-api.png)](https://travis-ci.org/rbarilani/angular-free-weather-api)
 
 A simple angular implementation for consuming the worldweatheronline.com's REST Api.
 http://developer.worldweatheronline.com/io-docs
@@ -31,7 +29,7 @@ Includes in your angularJS module and set the ***REQUIRED*** api key:
 
 ```javascript
 angular
-    .module('myApp',['hal9087.freeWeatherApi'])
+    .module('myApp',['rbarilani.freeWeatherApi'])
     .config(function(freeWeatherApiProvider) {
         freeWeatherApiProvider.setApiKey('YOUR_API_KEY_HERE');
     });

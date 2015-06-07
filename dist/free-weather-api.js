@@ -1,7 +1,7 @@
 /**
  * angular-free-weather-api
- * @version v0.0.1beta - 2014-04-22
- * @link https://github.com/hal9087/free-weather-api
+ * @version v0.0.1 - 2015-06-07
+ * @link https://github.com/rbarilani/free-weather-api
  * @author Ruben Barilani <ruben.barilani.dev@gmail.com>
  * @license MIT License, http://www.opensource.org/licenses/MIT
  */
@@ -10,7 +10,7 @@
 
 /**
  * @ngdoc module
- * @name hal9087.freeWeatherApi
+ * @name rbarilani.freeWeatherApi
  *
  * @description
  * A simple angular implementation for consuming the worldweatheronline.com's REST Api.
@@ -19,7 +19,7 @@
  * @author Ruben Barilani
  * @license MIT
  */
-angular.module('hal9087.freeWeatherApi', [])
+angular.module('rbarilani.freeWeatherApi', [])
 
 
 /**
@@ -53,7 +53,7 @@ angular.module('hal9087.freeWeatherApi', [])
  *
  * @example
 
- angular.module('myApp',['hal9087.freeWeatherApi'])
+ angular.module('myApp',['rbarilani.freeWeatherApi'])
 
  .config(function (freeWeatherApiProvider) {
 

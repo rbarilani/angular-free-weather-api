@@ -1,6 +1,6 @@
 {
     "name": "angular-free-weather-api",
-    "version": "0.0.1beta",
+    "version": "0.0.1",
     "main" : "dist/angular-free-weather-api.js",
     "exclude" : [
         "demo",
@@ -16,16 +16,16 @@
     ],
     "description": "A simple angular implementation for consuming the worldweatheronline.com's REST Api. http://developer.worldweatheronline.com/io-docs",
     "keywords": [ "angular angularJS angularJs weather weatheronline.com freeWeatherApi meteo"],
-    "homepage": "https://github.com/hal9087/free-weather-api",
-    "bugs": "https://github.com/hal9087/free-weather-api/issues",
+    "homepage": "https://github.com/rbarilani/free-weather-api",
+    "bugs": "https://github.com/rbarilani/rbarilani/issues",
     "author": {
         "name": "Ruben Barilani",
         "email": "ruben.barilani.dev@gmail.com",
-        "url": "https://github.com/hal9087"
+        "url": "https://github.com/rbarilani"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/hal9087/free-weather-api.git"
+        "url": "https://github.com/rbarilani/free-weather-api.git"
     },
     "licenses": [
         {

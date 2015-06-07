@@ -1,6 +1,6 @@
 'use strict';
 
-describe('hal9087.freeWeatherApi', function () {
+describe('rbarilani.freeWeatherApi', function () {
 
     describe('freeWeatherApiProvider', function () {
 
@@ -30,7 +30,7 @@ describe('hal9087.freeWeatherApi', function () {
             });
 
             // Initialize test.app injector
-            module('hal9087.freeWeatherApi', 'test.app.config');
+            module('rbarilani.freeWeatherApi', 'test.app.config');
 
             // Kickstart the injectors previously registered
             // with calls to angular.mock.module

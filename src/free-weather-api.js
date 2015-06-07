@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc module
- * @name hal9087.freeWeatherApi
+ * @name rbarilani.freeWeatherApi
  *
  * @description
  * A simple angular implementation for consuming the worldweatheronline.com's REST Api.
@@ -11,7 +11,7 @@
  * @author Ruben Barilani
  * @license MIT
  */
-angular.module('hal9087.freeWeatherApi', [])
+angular.module('rbarilani.freeWeatherApi', [])
 
 
 /**
@@ -45,7 +45,7 @@ angular.module('hal9087.freeWeatherApi', [])
  *
  * @example
 
- angular.module('myApp',['hal9087.freeWeatherApi'])
+ angular.module('myApp',['rbarilani.freeWeatherApi'])
 
  .config(function (freeWeatherApiProvider) {
 

@@ -1,6 +1,6 @@
 {
   "name": "angular-free-weather-api",
-  "version": "0.0.1beta",
+  "version": "0.0.0",
   "main" : "dist/free-weather-api.js",
   "exclude" : [
     "demo",
@@ -18,16 +18,16 @@
   "keywords": [
     "angular angularJS angularJs weather weatheronline.com freeWeatherApi meteo"
   ],
-  "homepage": "https://github.com/hal9087/free-weather-api",
-  "bugs": "https://github.com/hal9087/free-weather-api/issues",
+  "homepage": "https://github.com/rbarilani/free-weather-api",
+  "bugs": "https://github.com/rbarilani/free-weather-api/issues",
   "author": {
     "name": "Ruben Barilani",
     "email": "ruben.barilani.dev@gmail.com",
-    "url": "https://github.com/hal9087"
+    "url": "https://github.com/rbarilani"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/hal9087/free-weather-api.git"
+    "url": "https://github.com/rbarilani/free-weather-api.git"
   },
   "licenses": [
     {
