@@ -1,6 +1,6 @@
 {
   "name": "angular-free-weather-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main" : "dist/free-weather-api.js",
   "exclude" : [
     "demo",

@@ -1,7 +1,7 @@
 angular-free-weather-api
 =======================
 
-> **Version**: 0.0.1beta
+> **Version**:1.0.1
 
 [![Build Status](https://travis-ci.org/rbarilani/angular-free-weather-api.png)](https://travis-ci.org/rbarilani/angular-free-weather-api)
 

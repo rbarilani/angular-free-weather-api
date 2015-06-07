@@ -1,0 +1,2 @@
+PRE_CMD="grunt test"
+PRE_COMMIT_CMD="cat README.md | sed 's/\*\*Version\*\*:[0-9]\{1,\}.[0-9]\{1,\}.[0-9]\{1,\}/\*\*Version\*\*:{{NEW_TAG}}/' > README.md.tmp && mv README.md.tmp README.md && git add README.md"
